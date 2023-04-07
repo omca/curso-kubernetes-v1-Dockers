@@ -1,0 +1,49 @@
+version: "3.8"
+services:
+
+  postgresomar14:
+    container_name: postgresomar14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: sasa
+      POSTGRES_DATABASE: msvc_cursos
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  msvc-cursos:
+    container_name: msvc-cursos
+#    image: calderonomar48/cursos-udemy # trae la imagen del dockerhub
+    image: cursos:latest
+    build:
+      context: ./
+      dockerfile: ./msvc-cursos/Dockerfile
+    ports:
+      - "8002:8002"
+#    env_file:
+#      - ./msvc-cursos/.env
+    environment:
+      PORT: 8002
+      DB_HOST: postgresomar14
+      DB_PORT: 5432
+      DB_NAME: msvc_cursos
+      DB_USERNAME: postgres
+      DB_PASSWORD: sasa
+      USUARIOS_URL: ec2-18-212-184-185.compute-1.amazonaws.com
+      USUARIOS_PORT: 9001
+    networks:
+      - spring
+    depends_on:
+      - postgresomar14
+    restart: always
+
+volumes:
+  data-postgres:
+    name: data-postgres1
+networks:
+  spring:
+    name: spring

@@ -1,0 +1,89 @@
+version: "3.8"
+services:
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:8
+    ports:
+      - "33060:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sasa
+      MYSQL_DATABASE: msvc_usuarios
+    volumes:
+      - data-mysql:/var/lib/mysql
+    restart: always
+    networks:
+      - spring
+  postgresomar14:
+    container_name: postgresomar14
+    image: postgres:14-alpine
+    ports:
+      - "5532:5432"
+    environment:
+      POSTGRES_PASSWORD: sasa
+      POSTGRES_DATABASE: msvc_cursos
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    restart: always
+    networks:
+      - spring
+
+  msvc-usuarios:
+    container_name: msvc-usuarios
+    build:
+      context: ./
+      dockerfile: ./msvc-usuarios/Dockerfile
+    image: usuarios:latest1
+#    image: calderonomar48/usuarios  # trae la imagen del dockerhub
+    ports:
+      - "8001:8001"
+#    env_file:
+#      - ./msvc-usuarios/.env
+    environment:
+      PORT: 8001
+      DB_HOST: mysql-db
+      DB_PORT: 3306
+      DB_NAME: msvc_usuarios
+      DB_USERNAME: root
+      DB_PASSWORD: sasa
+      CURSOS_URL: msvc-cursos
+      CURSOS_PORT: 8002
+    networks:
+      - spring
+    depends_on:
+      - mysql-db
+    restart: always
+
+  msvc-cursos:
+    container_name: msvc-cursos
+#    image: calderonomar48/cursos # trae la imagen del dockerhub
+    image: cursos:latest2
+    build:
+      context: ./
+      dockerfile: ./msvc-cursos/Dockerfile
+    ports:
+      - "8002:8002"
+#    env_file:
+#      - ./msvc-cursos/.env
+    environment:
+      PORT: 8002
+      DB_HOST: postgresomar14
+      DB_PORT: 5432
+      DB_NAME: msvc_cursos
+      DB_USERNAME: postgres
+      DB_PASSWORD: sasa
+      USUARIOS_URL: msvc-usuarios
+      USUARIOS_PORT: 8001
+    networks:
+      - spring
+    depends_on:
+      - postgresomar14
+    restart: always
+
+volumes:
+  data-mysql:
+    name: data-mysql
+  data-postgres:
+    name: data-postgres
+networks:
+  spring:
+    name: spring

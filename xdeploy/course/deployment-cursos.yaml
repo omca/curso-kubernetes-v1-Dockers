@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msvc-cursos
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: msvc-cursos
+  template:
+    metadata:
+      labels:
+        app: msvc-cursos
+    spec:
+      containers:
+        - image: calderonomar48/cursos-globant
+          name: cursos-globant
+          ports:
+            - containerPort: 8002
+          env:
+            - name: PORT
+              value: "8002"
+            - name: DB_HOST
+              value: "postgresomar14"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: "msvc_cursos"
+            - name: DB_USERNAME
+              value: "postgres"
+            - name: DB_PASSWORD
+              value: "sasa"
+            - name: USUARIOS_URL
+              value: "msvc-usuarios:8001"
+

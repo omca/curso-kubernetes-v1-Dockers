@@ -1,0 +1,30 @@
+# estrategia: optimizar el dockerfile para que no demore tanto por cada ejecucion del Dockerfile.
+# ahorita demora bastante porque descarga las librerias del mvn, pero en una segunda vez deberian estar en cache
+FROM openjdk:17-jdk-alpine
+
+# crea esas carpetas en el docker
+WORKDIR /app/msvc-usuarios
+
+#copiando archivos: copy a -> b
+COPY ./pom.xml /app
+COPY ./msvc-usuarios/.mvn ./.mvn
+COPY ./msvc-usuarios/mvnw .
+COPY ./msvc-usuarios/pom.xml .
+
+# permisos para ejecutar clean package en docker
+RUN chmod +x mvnw
+
+#RUN es un comando que se ejecuta cuando se construye la imagen
+# aqui esta ejecutando un empaquetado .jar saltandose la compilacion y ejecucion del folder test y main
+RUN ./mvnw clean package -Dskip.test.skip -Dmaven.main.skip -Dspring-boot.repackage.skip && rm -r ./target/
+#RUN ./mvnw dependency:go-offline
+
+COPY ./msvc-usuarios/src ./src
+
+RUN ./mvnw clean package -DskipTests
+
+EXPOSE 8001
+
+# se va a ejecutar en algun punto de entra y ejecutammos comandos java apuntando al jar
+#ENTRYPOINT ["java", "-jar", "msvc-usuarios-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "./target/msvc-usuarios-0.0.1-SNAPSHOT.jar"]

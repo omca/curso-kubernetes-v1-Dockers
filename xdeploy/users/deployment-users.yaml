@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msvc-usuarios
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: msvc-usuarios
+  template:
+    metadata:
+      labels:
+        app: msvc-usuarios
+    spec:
+      containers:
+      - image: calderonomar48/usuarios-globant
+        name: usuarios-globant
+        ports:
+        - containerPort: 8001
+
+        env:
+          - name: PORT
+            value: "8001"
+          - name: DB_HOST
+            value: "mysql-db"
+          - name: DB_PORT
+            value: "3306"
+          - name: DB_NAME
+            value: "msvc_usuarios"
+          - name: DB_USERNAME
+            value: "root"
+          - name: DB_PASSWORD
+            value: "sasa"
+          - name: CURSOS_URL
+            value: "msvc-cursos:8002"

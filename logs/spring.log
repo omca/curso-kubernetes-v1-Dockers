@@ -1,0 +1,31 @@
+2022-12-26 04:31:33.762  INFO 1 --- [main] o.a.s.m.u.MsvcUsuariosApplication        : Starting MsvcUsuariosApplication v0.0.1-SNAPSHOT using Java 17-ea on 715c4b843943 with PID 1 (/app/msvc-usuarios-0.0.1-SNAPSHOT.jar started by root in /app)
+2022-12-26 04:31:33.779  INFO 1 --- [main] o.a.s.m.u.MsvcUsuariosApplication        : No active profile set, falling back to 1 default profile: "default"
+2022-12-26 04:31:37.110  INFO 1 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2022-12-26 04:31:37.238  INFO 1 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 97 ms. Found 1 JPA repository interfaces.
+2022-12-26 04:31:37.864  INFO 1 --- [main] o.s.cloud.context.scope.GenericScope     : BeanFactory id=df98bfe0-2cde-3c73-90eb-54d547eed08a
+2022-12-26 04:31:39.204  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8001 (http)
+2022-12-26 04:31:39.245  INFO 1 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2022-12-26 04:31:39.246  INFO 1 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.58]
+2022-12-26 04:31:39.408  INFO 1 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2022-12-26 04:31:39.409  INFO 1 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5356 ms
+2022-12-26 04:31:39.873  INFO 1 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2022-12-26 04:31:41.048  INFO 1 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2022-12-26 04:31:41.228  INFO 1 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2022-12-26 04:31:41.522  INFO 1 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.5.Final
+2022-12-26 04:31:42.237  INFO 1 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2022-12-26 04:31:42.652  INFO 1 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2022-12-26 04:31:44.505  INFO 1 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2022-12-26 04:31:44.547  INFO 1 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2022-12-26 04:31:46.152  WARN 1 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2022-12-26 04:31:47.539  INFO 1 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8001 (http) with context path ''
+2022-12-26 04:31:47.558  INFO 1 --- [main] o.a.s.m.u.MsvcUsuariosApplication        : Started MsvcUsuariosApplication in 15.696 seconds (JVM running for 17.242)
+2022-12-26 04:32:43.518  INFO 1 --- [http-nio-8001-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2022-12-26 04:32:43.518  INFO 1 --- [http-nio-8001-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2022-12-26 04:32:43.520  INFO 1 --- [http-nio-8001-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2022-12-26 04:32:43.715 DEBUG 1 --- [http-nio-8001-exec-1] org.hibernate.SQL                        : select usuario0_.id as id1_1_, usuario0_.email as email2_1_, usuario0_.nombre as nombre3_1_, usuario0_.password as password4_1_ from usuarios usuario0_
+2022-12-26 04:33:00.703 DEBUG 1 --- [http-nio-8001-exec-3] org.hibernate.SQL                        : select usuario0_.id as col_0_0_ from usuarios usuario0_ where usuario0_.email=? limit ?
+2022-12-26 04:33:05.187 DEBUG 1 --- [http-nio-8001-exec-5] org.hibernate.SQL                        : select usuario0_.id as col_0_0_ from usuarios usuario0_ where usuario0_.email=? limit ?
+2022-12-26 04:33:05.243 DEBUG 1 --- [http-nio-8001-exec-5] org.hibernate.SQL                        : insert into usuarios (email, nombre, password) values (?, ?, ?)
+2022-12-26 04:33:08.638 DEBUG 1 --- [http-nio-8001-exec-6] org.hibernate.SQL                        : select usuario0_.id as id1_1_, usuario0_.email as email2_1_, usuario0_.nombre as nombre3_1_, usuario0_.password as password4_1_ from usuarios usuario0_
+2022-12-26 04:33:18.851 DEBUG 1 --- [http-nio-8001-exec-7] org.hibernate.SQL                        : select usuario0_.id as id1_1_, usuario0_.email as email2_1_, usuario0_.nombre as nombre3_1_, usuario0_.password as password4_1_ from usuarios usuario0_
+2022-12-26 04:33:19.493 DEBUG 1 --- [http-nio-8001-exec-8] org.hibernate.SQL                        : select usuario0_.id as id1_1_, usuario0_.email as email2_1_, usuario0_.nombre as nombre3_1_, usuario0_.password as password4_1_ from usuarios usuario0_
